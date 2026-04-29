@@ -283,28 +283,29 @@
   /* App download box: badges left, QR right */
   .app-download-box {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 1fr auto;
     grid-template-rows: auto auto;
     gap: 10px;
     align-items: center;
     background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.12);
     border-radius: var(--radius);
-    padding: 16px;
-    width: fit-content;
+    padding: 14px 16px;
+    width: 100%;
+    max-width: 280px;
   }
   .app-badge-link {
     display: block; text-decoration: none;
     transition: opacity 0.2s; grid-column: 1;
   }
   .app-badge-link:hover { opacity: 0.8; }
-  .app-badge-link img { height: 36px; display: block; }
+  .app-badge-link img { height: 38px; width: auto; display: block; object-fit: contain; }
   .app-qr {
     grid-column: 2; grid-row: 1 / span 2;
     display: flex; align-items: center; justify-content: center;
-    padding-left: 10px; border-left: 1px solid rgba(255,255,255,0.1);
+    padding-left: 12px; border-left: 1px solid rgba(255,255,255,0.12);
   }
-  .app-qr img { width: 80px; height: 80px; display: block; border-radius: 6px; }
+  .app-qr img { width: 76px; height: 76px; display: block; border-radius: 6px; background: #fff; padding: 4px; }
 
   .footer-col h4 {
     font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
@@ -654,10 +655,10 @@
       <p>MyGeoVerse is the modular spatial AR platform powering location-aware experiences across mobile, AI glasses, and mixed reality devices.</p>
       <!-- App download box: badges left, QR right -->
       <div class="app-download-box">
-        <a href="https://apps.apple.com" target="_blank" rel="noopener" class="app-badge-link">
+        <a href="https://apps.apple.com/jm/app/mygeoverse/id6443591665" target="_blank" rel="noopener" class="app-badge-link">
           <img src="images/appstore-mgv.webp" alt="Download on the App Store">
         </a>
-        <a href="https://play.google.com" target="_blank" rel="noopener" class="app-badge-link">
+        <a href="https://play.google.com/store/apps/details?id=com.mygeoverse.platform&hl=en&gl=US" target="_blank" rel="noopener" class="app-badge-link">
           <img src="images/googleplay-mgv.webp" alt="Get it on Google Play">
         </a>
         <div class="app-qr">
