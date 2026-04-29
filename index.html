@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyGeoVerse Platform — Spatial AR Modules</title>
+<meta name="description" content="MyGeoVerse is the modular spatial AR platform that powers location-aware experiences across mobile, AI smart glasses, and mixed reality devices.">
+<link rel="canonical" href="https://frontend.mygeoverse.com/">
+<link href="https://fonts.googleapis.com/css2?family=Sarala:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════
+     DESIGN TOKENS — MyGeoVerse.com system
+  ═══════════════════════════════════════ */
+  :root {
+    --white:        #ffffff;
+    --light-bg:     #F5F7F9;
+    --dark-hero:    #062E46;
+    --dark-footer:  #02273D;
+    --primary:      #16669E;
+    --secondary:    #084062;
+    --accent:       #EC6625;
+    --text:         #616060;
+    --text-dark:    #282B2E;
+    --border:       rgba(0,0,0,0.09);
+    --shadow:       0 2px 18px rgba(0,0,0,0.07);
+    --radius:       13px;
+    --pill:         150px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--text-dark);
+    font-family: 'Sarala', sans-serif;
+    font-weight: 400;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ═══════════════════════════════════════
+     TOP BAR — "part of mygeoverse.com"
+  ═══════════════════════════════════════ */
+  .top-bar {
+    background: var(--secondary);
+    padding: 8px 40px;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.02em;
+  }
+  .top-bar a {
+    color: var(--white);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    transition: border-color 0.2s;
+  }
+  .top-bar a:hover { border-color: var(--white); }
+
+  /* ═══════════════════════════════════════
+     NAV
+  ═══════════════════════════════════════ */
+  nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 200;
+    box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    height: 72px; padding: 0 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px;
+  }
+
+  /* Logo */
+  .nav-logo { flex-shrink: 0; }
+  .nav-logo img { height: 42px; display: block; }
+
+  /* Main links */
+  .nav-links {
+    display: flex; gap: 0; list-style: none; align-items: center;
+  }
+  .nav-links > li { position: relative; }
+  .nav-links > li > a {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 14px; font-weight: 700;
+    color: var(--text-dark); text-decoration: none;
+    padding: 10px 18px; border-radius: 8px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-links > li > a:hover { color: var(--primary); background: var(--light-bg); }
+  .nav-links > li > a.active { color: var(--primary); }
+
+  /* Dropdown arrow */
+  .nav-links .arrow {
+    display: inline-block; width: 0; height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid currentColor;
+    opacity: 0.5; transition: transform 0.2s;
+    margin-top: 1px;
+  }
+  .nav-links > li:hover .arrow { transform: rotate(180deg); }
+
+  /* Dropdown menus */
+  .nav-dropdown {
+    display: none;
+    position: absolute; top: calc(100% + 8px); left: 0;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    min-width: 200px; padding: 8px 0;
+    list-style: none; z-index: 300;
+  }
+  .nav-links > li:hover .nav-dropdown { display: block; }
+  .nav-dropdown li a {
+    display: block; padding: 10px 20px;
+    font-size: 13px; color: var(--text-dark);
+    text-decoration: none; transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .nav-dropdown li a:hover { background: var(--light-bg); color: var(--primary); }
+  .nav-dropdown li a span {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+    color: var(--accent); background: rgba(236,102,37,0.1);
+    border-radius: 4px; padding: 2px 6px; margin-left: 8px;
+  }
+
+  /* Divider in dropdown */
+  .nav-dropdown .sep { height: 1px; background: var(--border); margin: 6px 0; }
+
+  /* Nav right side */
+  .nav-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+  .nav-login {
+    font-size: 13px; font-weight: 700; color: var(--text-dark);
+    text-decoration: none; padding: 8px 16px;
+    border-radius: var(--pill); border: 1.5px solid var(--border);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .nav-login:hover { border-color: var(--primary); color: var(--primary); }
+
+  .nav-cta {
+    background: var(--accent); color: var(--white) !important;
+    font-weight: 700; font-size: 13px; letter-spacing: 0.03em;
+    padding: 10px 22px; border-radius: var(--pill);
+    text-decoration: none; transition: background 0.2s, transform 0.2s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: #d45a20; transform: translateY(-1px); }
+
+  /* Hamburger */
+  .nav-burger {
+    display: none; background: none; border: none; cursor: pointer;
+    padding: 6px; flex-direction: column; gap: 5px;
+  }
+  .nav-burger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--text-dark); border-radius: 2px; transition: 0.2s;
+  }
+
+  /* ═══════════════════════════════════════
+     HERO
+  ═══════════════════════════════════════ */
+  .hero-wrap {
+    background: var(--dark-hero);
+    padding: 88px 40px 80px;
+  }
+  .hero {
+    max-width: 1200px; margin: 0 auto;
+    opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 24px;
+  }
+  .eyebrow::before, .eyebrow::after {
+    content: ''; display: block;
+    width: 22px; height: 1px; background: var(--accent); opacity: 0.5;
+  }
+
+  h1 {
+    font-size: clamp(34px, 4.8vw, 62px);
+    font-weight: 700; line-height: 1.07;
+    color: var(--white); letter-spacing: -0.01em;
+    margin-bottom: 22px;
+  }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  .hero-sub {
+    font-size: 17px; line-height: 1.78;
+    color: rgba(255,255,255,0.7);
+    max-width: 640px; margin-bottom: 38px;
+  }
+
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 52px; }
+
+  .btn-primary {
+    background: var(--accent); color: var(--white);
+    font-family: 'Sarala', sans-serif; font-weight: 700;
+    font-size: 14px; letter-spacing: 0.03em;
+    padding: 14px 32px; border-radius: var(--pill); border: none;
+    text-decoration: none; display: inline-block;
+    transition: background 0.2s, transform 0.2s; cursor: pointer;
+  }
+  .btn-primary:hover { background: #d45a20; transform: translateY(-1px); }
+
+  .btn-ghost {
+    background: transparent; color: var(--white);
+    font-family: 'Sarala', sans-serif; font-weight: 700;
+    font-size: 14px; letter-spacing: 0.03em;
+    padding: 13px 32px; border-radius: var(--pill);
+    border: 2px solid rgba(255,255,255,0.32);
+    text-decoration: none; display: inline-block;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.72); transform: translateY(-1px); }
+
+  /* Module nav pills */
+  .module-nav { display: flex; gap: 10px; flex-wrap: wrap; }
+  .module-pill {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: var(--pill); padding: 7px 16px;
+    font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.8);
+    text-decoration: none; transition: background 0.2s, border-color 0.2s;
+  }
+  .module-pill:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.38); }
+  .module-pill .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ═══════════════════════════════════════
+     PAGE & SECTIONS
+  ═══════════════════════════════════════ */
+  .page { max-width: 1200px; margin: 0 auto; padding: 0 40px 80px; }
+
+  .divider { height: 1px; background: var(--border); margin: 60px 0; }
+
+  .section-eyebrow {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: clamp(26px, 3vw, 38px); font-weight: 700;
+    color: var(--text-dark); line-height: 1.14; margin-bottom: 14px;
+  }
+  .section-sub { font-size: 15px; color: var(--text); line-height: 1.72; max-width: 580px; }
+
+  /* ═══════════════════════════════════════
+     MODULE SECTIONS
+  ═══════════════════════════════════════ */
+  .module-section {
+    margin-bottom: 76px;
+    opacity: 0; animation: fadeUp 0.7s ease forwards;
+  }
+  .module-section:nth-child(1) { animation-delay: 0.05s; }
+  .module-section:nth-child(2) { animation-delay: 0.1s; }
+  .module-section:nth-child(3) { animation-delay: 0.15s; }
+  .module-section:nth-child(4) { animation-delay: 0.2s; }
+  .module-section:nth-child(5) { animation-delay: 0.25s; }
+
+  .module-header { display: flex; align-items: flex-start; gap: 18px; margin-bottom: 32px; }
+
+  .module-number {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    color: var(--white); padding: 5px 13px; border-radius: var(--pill);
+    flex-shrink: 0; margin-top: 5px;
+  }
+  .m1 .module-number, .m3 .module-number, .m5 .module-number { background: var(--primary); }
+  .m2 .module-number, .m4 .module-number { background: var(--accent); }
+
+  .module-header-text h2 {
+    font-size: clamp(20px, 2.4vw, 28px); font-weight: 700;
+    color: var(--secondary); line-height: 1.2; margin-bottom: 8px;
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .module-header-text p { font-size: 15px; color: var(--text); line-height: 1.72; max-width: 700px; }
+
+  /* ═══════════════════════════════════════
+     FEATURE CARDS
+  ═══════════════════════════════════════ */
+  .features-grid { display: grid; gap: 18px; }
+  .features-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .features-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  .feature-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px;
+    box-shadow: var(--shadow); display: flex; flex-direction: column;
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+  }
+  .feature-card:hover {
+    border-color: rgba(22,102,158,0.28);
+    box-shadow: 0 8px 32px rgba(22,102,158,0.1);
+    transform: translateY(-3px);
+  }
+
+  .feat-icon { font-size: 28px; margin-bottom: 14px; }
+  .feat-label {
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    font-weight: 700; color: var(--primary); margin-bottom: 6px;
+  }
+  .feature-card h3 {
+    font-size: 15px; font-weight: 700; color: var(--text-dark);
+    margin-bottom: 9px; line-height: 1.35;
+  }
+  .feature-card p { font-size: 13px; color: var(--text); line-height: 1.68; flex: 1; }
+
+  .tag {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: var(--pill); margin-top: 14px;
+  }
+  .tag-live {
+    background: rgba(22,102,158,0.08); border: 1px solid rgba(22,102,158,0.2); color: var(--primary);
+  }
+  .tag-coming {
+    background: rgba(236,102,37,0.08); border: 1px solid rgba(236,102,37,0.25); color: var(--accent);
+  }
+
+  /* ═══════════════════════════════════════
+     DEVICES
+  ═══════════════════════════════════════ */
+  .devices-section { margin-bottom: 76px; opacity: 0; animation: fadeUp 0.7s ease 0.1s forwards; }
+  .devices-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 38px; }
+
+  .device-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 34px 28px;
+    box-shadow: var(--shadow); border-bottom: 3px solid var(--border);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .device-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+  .dc1 { border-bottom-color: var(--primary); }
+  .dc2 { border-bottom-color: var(--accent); }
+  .dc3 { border-bottom-color: var(--secondary); }
+
+  .device-icon { font-size: 32px; margin-bottom: 16px; display: block; }
+  .device-card h3 { font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 9px; }
+  .device-card p { font-size: 13px; color: var(--text); line-height: 1.68; margin-bottom: 18px; }
+
+  .device-specs { display: flex; flex-direction: column; gap: 7px; }
+  .device-spec {
+    font-size: 12px; color: var(--text);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .device-spec::before {
+    content: ''; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--primary); flex-shrink: 0;
+  }
+  .dc2 .device-spec::before { background: var(--accent); }
+  .dc3 .device-spec::before { background: var(--secondary); }
+
+  /* ═══════════════════════════════════════
+     CTA SECTION
+  ═══════════════════════════════════════ */
+  .cta-section {
+    background: var(--dark-hero); border-radius: var(--radius);
+    padding: 72px 64px; text-align: center;
+    opacity: 0; animation: fadeUp 0.7s ease 0.15s forwards;
+  }
+  .cta-section h2 {
+    font-size: clamp(26px, 3vw, 40px); font-weight: 700;
+    color: var(--white); margin-bottom: 14px;
+  }
+  .cta-section h2 em { font-style: normal; color: var(--accent); }
+  .cta-section p {
+    font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.75;
+    max-width: 480px; margin: 0 auto 34px;
+  }
+  .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  /* ═══════════════════════════════════════
+     FOOTER
+  ═══════════════════════════════════════ */
+  .footer-wrap {
+    background: var(--dark-footer);
+    margin-top: 80px; padding: 64px 40px 0;
+  }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+    gap: 48px;
+    padding-bottom: 52px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* Col 1 — brand */
+  .footer-brand img { height: 48px; margin-bottom: 20px; display: block; }
+  .footer-brand p {
+    font-size: 13px; color: rgba(255,255,255,0.5);
+    line-height: 1.75; max-width: 280px; margin-bottom: 24px;
+  }
+  .footer-app-badges { display: flex; flex-direction: column; gap: 10px; }
+  .app-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 10px; padding: 9px 16px; text-decoration: none;
+    transition: background 0.2s;
+  }
+  .app-badge:hover { background: rgba(255,255,255,0.12); }
+  .app-badge span { font-size: 10px; color: rgba(255,255,255,0.5); display: block; }
+  .app-badge strong { font-size: 13px; color: var(--white); display: block; line-height: 1.2; }
+
+  /* Col 2 & 3 — links */
+  .footer-col h4 {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    font-weight: 700; color: rgba(255,255,255,0.35);
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-col ul li a {
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: var(--white); }
+  .footer-col ul li a .cs {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.08em;
+    color: var(--accent); background: rgba(236,102,37,0.12);
+    border-radius: 4px; padding: 2px 6px; margin-left: 6px;
+  }
+
+  /* Col 4 — social */
+  .footer-social h4 {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    font-weight: 700; color: rgba(255,255,255,0.35); margin-bottom: 20px;
+  }
+  .social-links { display: flex; gap: 10px; margin-bottom: 28px; }
+  .social-link {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .social-link:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); }
+  .footer-social p { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.65; }
+
+  /* Footer bottom bar */
+  .footer-bottom {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px 0; flex-wrap: wrap; gap: 16px;
+  }
+  .footer-bottom-left { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .footer-bottom-left img { height: 32px; opacity: 0.45; }
+  .footer-bottom-left p { font-size: 12px; color: rgba(255,255,255,0.28); }
+  .footer-legal { display: flex; gap: 20px; list-style: none; }
+  .footer-legal a { font-size: 12px; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+  .footer-legal a:hover { color: rgba(255,255,255,0.7); }
+
+  /* ═══════════════════════════════════════
+     ANIMATIONS
+  ═══════════════════════════════════════ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ═══════════════════════════════════════
+     RESPONSIVE
+  ═══════════════════════════════════════ */
+  @media (max-width: 1024px) {
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .top-bar { padding: 7px 20px; font-size: 11px; }
+    .nav-inner { padding: 0 20px; height: 64px; }
+    .nav-links, .nav-login { display: none; }
+    .nav-burger { display: flex; }
+    .hero-wrap { padding: 60px 24px 56px; }
+    .page { padding: 0 24px 60px; }
+    h1 { font-size: 30px; }
+    .features-grid.cols-2,
+    .features-grid.cols-3 { grid-template-columns: 1fr; }
+    .devices-grid { grid-template-columns: 1fr; }
+    .cta-section { padding: 48px 28px; }
+    .footer-wrap { padding: 48px 24px 0; }
+    .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  Part of the <a href="https://www.mygeoverse.com">MyGeoVerse</a> ecosystem &nbsp;·&nbsp; Download the app:
+  <a href="https://apps.apple.com" target="_blank" rel="noopener">App Store</a> &nbsp;&amp;&nbsp;
+  <a href="https://play.google.com" target="_blank" rel="noopener">Google Play</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+
+    <a class="nav-logo" href="https://www.mygeoverse.com">
+      <img src="images/MGV_logo.png" alt="MyGeoVerse">
+    </a>
+
+    <ul class="nav-links">
+
+      <li>
+        <a href="#">Platform <span class="arrow"></span></a>
+        <ul class="nav-dropdown">
+          <li><a href="https://www.mygeoverse.com/platform/">What is MyGeoVerse</a></li>
+          <li><a href="https://www.mygeoverse.com/platform/for-creators-testers/">For Creators &amp; Testers</a></li>
+          <li><a href="https://www.mygeoverse.com/platform/testbed-program/">Testbed Program</a></li>
+          <li class="sep"></li>
+          <li><a href="#modules">Platform Modules <span>↓ this page</span></a></li>
+          <li><a href="packages.html">Packages &amp; Pricing</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#">Solutions <span class="arrow"></span></a>
+        <ul class="nav-dropdown">
+          <li><a href="https://www.mygeoverse.com/solutions/">All Solutions</a></li>
+          <li><a href="https://www.mygeoverse.com/solutions/">Retail &amp; Hospitality</a></li>
+          <li><a href="https://www.mygeoverse.com/solutions/">Airports &amp; Transit</a></li>
+          <li><a href="https://www.mygeoverse.com/solutions/">Entertainment &amp; Events</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#">Company <span class="arrow"></span></a>
+        <ul class="nav-dropdown">
+          <li><a href="https://www.mygeoverse.com/company/about-us/">About Us</a></li>
+          <li><a href="https://www.mygeoverse.com/company/blog/">Blog &amp; News</a></li>
+          <li><a href="https://www.mygeoverse.com/company/contact-us/">Contact Us</a></li>
+        </ul>
+      </li>
+
+    </ul>
+
+    <div class="nav-right">
+      <a href="https://www.mygeoverse.com/platform/for-creators-testers/#testers" class="nav-login">Login</a>
+      <a href="https://www.mygeoverse.com/company/contact-us/" class="nav-cta">Get Beta Access</a>
+    </div>
+
+    <button class="nav-burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero-wrap" id="platform">
+  <div class="hero">
+    <div class="eyebrow">Spatial AR Platform</div>
+    <h1>The Operating System<br>for <em>Spatial Experiences</em></h1>
+    <p class="hero-sub">
+      MyGeoVerse is the modular platform that lets operators, developers, and venue owners build, manage, and monetize location-aware AR experiences — across mobile devices, AI smart glasses, and mixed reality hardware.
+    </p>
+    <div class="hero-actions">
+      <a href="https://www.mygeoverse.com/company/contact-us/" class="btn-primary">Request a Demo</a>
+      <a href="#modules" class="btn-ghost">Explore Modules</a>
+    </div>
+    <div class="module-nav">
+      <a href="#m1" class="module-pill"><span class="dot" style="background:#16669E;"></span>Spatial Browser</a>
+      <a href="#m2" class="module-pill"><span class="dot" style="background:#EC6625;"></span>Spatial Navigation</a>
+      <a href="#m3" class="module-pill"><span class="dot" style="background:#16669E;"></span>Content Management</a>
+      <a href="#m4" class="module-pill"><span class="dot" style="background:#EC6625; opacity:0.65;"></span>Spatial Revenue</a>
+      <a href="#m5" class="module-pill"><span class="dot" style="background:#084062;"></span>Spatial Payment</a>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE CONTENT -->
+<div class="page">
+
+  <div class="divider"></div>
+
+  <!-- MODULES -->
+  <section id="modules">
+
+    <!-- 01 Spatial Browser -->
+    <div class="module-section m1" id="m1">
+      <div class="module-header">
+        <div class="module-number">01</div>
+        <div class="module-header-text">
+          <h2>Spatial Browser Module</h2>
+          <p>The foundation of every MyGeoVerse deployment. Define how visitors enter your spatial world — with your brand identity, your visual language, and your story front and center from the very first interaction.</p>
+        </div>
+      </div>
+      <div class="features-grid cols-3">
+        <div class="feature-card">
+          <div class="feat-icon">🏷️</div>
+          <div class="feat-label">White Label</div>
+          <h3>App Licensing</h3>
+          <p>Deploy MyGeoVerse under your own brand. Your name in the app stores, your icon on the home screen. Full white-label licensing across iOS and Android, with your identity owning the entire experience.</p>
+          <span class="tag tag-live">Available Now</span>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">🎨</div>
+          <div class="feat-label">Location-Based Branding</div>
+          <h3>Custom Logo &amp; Opening Sliders</h3>
+          <p>Define the branded entry experience for each location. Your venue's logo and onboarding sliders are customized per site — so every deployment opens with the right identity for the right place.</p>
+          <span class="tag tag-live">Mobile Only</span>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">📍</div>
+          <div class="feat-label">Localization Control</div>
+          <h3>Location-Based Localization Enforcement</h3>
+          <p>Enforce the precise localization method your venue requires based on where visitors are. Seamlessly switch between GPS, VPS, and Cloud Anchor depending on zone, coverage conditions, or operational need — no manual override required.</p>
+          <span class="tag tag-live">Mobile Only</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 Spatial Navigation -->
+    <div class="module-section m2" id="m2">
+      <div class="module-header">
+        <div class="module-number">02</div>
+        <div class="module-header-text">
+          <h2>Spatial Navigation Module</h2>
+          <p>Guide visitors through any physical environment with precision AR wayfinding. From simple point-to-point journeys to full spatial mesh navigation — choose the level of fidelity your venue demands.</p>
+        </div>
+      </div>
+      <div class="features-grid cols-2">
+        <div class="feature-card">
+          <div class="feat-icon">🧭</div>
+          <div class="feat-label">AR Wayfinding</div>
+          <h3>Point-to-Point Navigation</h3>
+          <p>Define curated paths through your venue using the MyGeoVerse Navigation Tool and Scene Creation module. Visitors follow AR overlays from origin to destination — no complex 3D collision mesh required. Ideal for airports, museums, retail, and events.</p>
+          <span class="tag tag-live">Mobile Only</span>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">🗺️</div>
+          <div class="feat-label">Advanced Navigation</div>
+          <h3>AR Navigation w/ Collision Mesh</h3>
+          <p>For venues that demand full spatial accuracy. Collision mesh-based navigation dynamically accounts for walls, floors, and physical obstacles — delivering real-world pathfinding across mobile and AI glasses platforms.</p>
+          <span class="tag tag-live">All Platforms</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 Spatial Content Management -->
+    <div class="module-section m3" id="m3">
+      <div class="module-header">
+        <div class="module-number">03</div>
+        <div class="module-header-text">
+          <h2>Spatial Content Management Module</h2>
+          <p>The creative and operational core of the platform. Upload, place, and manage spatially-anchored content from anywhere in the world — with AI creation tools, cloud-precision localization, and location-aware customization built in.</p>
+        </div>
+      </div>
+      <div class="features-grid cols-3">
+        <div class="feature-card">
+          <div class="feat-icon">📤</div>
+          <div class="feat-label">Content</div>
+          <h3>Uploading &amp; Placement</h3>
+          <p>Push 3D objects, video, audio, and interactive elements directly into your spatial scene. Place content visually — no 3D expertise required.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">📡</div>
+          <div class="feat-label">GPS Anchoring</div>
+          <h3>Remote Placement</h3>
+          <p>Position spatial content remotely using GPS coordinates. Deploy to any location in the world without setting foot on-site during content management.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">☁️</div>
+          <div class="feat-label">Precision</div>
+          <h3>VPS / Cloud Anchor Localization</h3>
+          <p>Sub-centimeter content persistence through Visual Positioning System and Cloud Anchor technology. Content stays exactly where you put it — every visit, every device.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">🎬</div>
+          <div class="feat-label">Creation Tool</div>
+          <h3>Creators Studio</h3>
+          <p>A powerful in-platform studio for building spatial scenes, defining interaction triggers, and composing immersive environments — without writing a single line of code.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">🤖</div>
+          <div class="feat-label">AI Tools</div>
+          <h3>AI Agent Studio</h3>
+          <p>Train, configure, and deploy conversational AI agents directly within your spatial environment. Define your agent's knowledge base, persona, and behavior — all from within the platform.</p>
+          <span class="tag tag-coming">Coming Soon</span>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">📍</div>
+          <div class="feat-label">Personalization</div>
+          <h3>Location-Based Customization</h3>
+          <p>Deliver different content, experiences, and messaging based on exactly where a visitor is standing. Zone-level personalization at scale — managed centrally.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 Spatial Revenue -->
+    <div class="module-section m4" id="m4">
+      <div class="module-header">
+        <div class="module-number">04</div>
+        <div class="module-header-text">
+          <h2>Spatial Revenue Module <span class="tag tag-coming" style="font-size:10px; vertical-align:middle;">Coming Soon</span></h2>
+          <p>Your physical space is now an active revenue channel. MyGeoVerse turns every square metre of your venue into an addressable, monetizable spatial surface — through contextually-aware advertising and immersive commerce stops.</p>
+        </div>
+      </div>
+      <div class="features-grid cols-2">
+        <div class="feature-card">
+          <div class="feat-icon">📣</div>
+          <div class="feat-label">Advertising</div>
+          <h3>Spatial Ads</h3>
+          <p>Serve location-triggered, context-aware AR advertisements within your venue's spatial layer. Offer advertisers placements that are truly unmissable — anchored to the real world, delivered exactly where attention lives.</p>
+          <span class="tag tag-coming">Coming Soon</span>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">🛑</div>
+          <div class="feat-label">Commerce</div>
+          <h3>AR Stops</h3>
+          <p>Define interactive AR destinations throughout your venue — product showcases, sponsored moments, exclusive unlocks. Visitors discover them naturally as they move through your space. Operators monetize every stop.</p>
+          <span class="tag tag-coming">Coming Soon</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 Spatial Payment -->
+    <div class="module-section m5" id="m5">
+      <div class="module-header">
+        <div class="module-number">05</div>
+        <div class="module-header-text">
+          <h2>Spatial Payment Module <span class="tag tag-coming" style="font-size:10px; vertical-align:middle;">Coming Soon</span></h2>
+          <p>Monetize the spatial layer directly. Give visitors a seamless way to transact inside your AR experience — whether through standard in-app purchases or a branded virtual currency ecosystem tied exclusively to your venue.</p>
+        </div>
+      </div>
+      <div class="features-grid cols-2">
+        <div class="feature-card">
+          <div class="feat-icon">💳</div>
+          <div class="feat-label">Transactions</div>
+          <h3>In-App Purchases</h3>
+          <p>Enable direct commerce within the spatial experience. Sell AR content, unlock exclusive experiences, or offer venue-specific products — all transacted natively within the MyGeoVerse environment across mobile and AI glasses.</p>
+          <span class="tag tag-coming">Coming Soon</span>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">🪙</div>
+          <div class="feat-label">Virtual Economy</div>
+          <h3>In-App Currency</h3>
+          <p>Build a branded virtual currency ecosystem for your venue. Issue, manage, and redeem your own spatial tokens — driving repeat engagement, loyalty, and a self-contained economy that visitors keep coming back to spend.</p>
+          <span class="tag tag-coming">Coming Soon</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- DEVICES -->
+  <section class="devices-section" id="devices">
+    <div class="section-eyebrow">Hardware Support</div>
+    <div class="section-title">Built for the devices<br>visitors already carry</div>
+    <p class="section-sub">Every MyGeoVerse module is architected to run across the current and next generation of spatial hardware — with no rebuild required as the device landscape evolves.</p>
+    <div class="devices-grid">
+      <div class="device-card dc1">
+        <span class="device-icon">📱</span>
+        <h3>Mobile AR</h3>
+        <p>Full-featured spatial experiences on the device in every visitor's pocket. Audio, visual, and interactive AR — no headset required.</p>
+        <div class="device-specs">
+          <div class="device-spec">iOS (iPhone)</div>
+          <div class="device-spec">Android</div>
+          <div class="device-spec">All modules supported</div>
+          <div class="device-spec">Available now</div>
+        </div>
+      </div>
+      <div class="device-card dc2">
+        <span class="device-icon">🕶️</span>
+        <h3>Ray-Ban Meta Smart Glasses</h3>
+        <p>Hands-free, voice-driven AI companion experiences. No screen, no friction — just conversation-led guidance layered onto the real world.</p>
+        <div class="device-specs">
+          <div class="device-spec">Ray-Ban Meta (all models)</div>
+          <div class="device-spec">Voice-first interaction</div>
+          <div class="device-spec">Spatial Browser, Navigation, Revenue, Payment</div>
+          <div class="device-spec" style="color:var(--accent); font-weight:700;">Coming Soon</div>
+        </div>
+      </div>
+      <div class="device-card dc3">
+        <span class="device-icon">🥽</span>
+        <h3>Android XR</h3>
+        <p>Full mixed reality deployment on Android's open XR platform. Immersive overlays, persistent spatial content, and AI agent interaction in true mixed reality.</p>
+        <div class="device-specs">
+          <div class="device-spec">Android XR headsets</div>
+          <div class="device-spec">Full MR spatial overlay</div>
+          <div class="device-spec">Spatial Browser, Navigation, Revenue, Payment</div>
+          <div class="device-spec" style="color:var(--accent); font-weight:700;">Coming Soon</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CTA -->
+  <section class="cta-section" id="contact">
+    <h2>Ready to build your <em>spatial layer?</em></h2>
+    <p>Talk to the MyGeoVerse team about your venue, your use case, and which modules fit your vision. We'll scope it, deploy it, and support it.</p>
+    <div class="cta-buttons">
+      <a href="https://www.mygeoverse.com/company/contact-us/" class="btn-primary">Talk to the Team</a>
+      <a href="packages.html" class="btn-ghost">View Packages</a>
+    </div>
+  </section>
+
+</div><!-- /page -->
+
+<!-- FOOTER -->
+<div class="footer-wrap">
+  <div class="footer-inner">
+
+    <!-- Brand col -->
+    <div class="footer-brand">
+      <img src="images/MGV_logo.png" alt="MyGeoVerse">
+      <p>MyGeoVerse is the modular spatial AR platform powering location-aware experiences across mobile, AI glasses, and mixed reality devices.</p>
+      <div class="footer-app-badges">
+        <a href="https://apps.apple.com" target="_blank" rel="noopener" class="app-badge">
+          <span style="font-size:22px; line-height:1;">🍎</span>
+          <div><span>Download on the</span><strong>App Store</strong></div>
+        </a>
+        <a href="https://play.google.com" target="_blank" rel="noopener" class="app-badge">
+          <span style="font-size:22px; line-height:1;">▶️</span>
+          <div><span>Get it on</span><strong>Google Play</strong></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Platform col -->
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="https://www.mygeoverse.com/platform/">What is MyGeoVerse</a></li>
+        <li><a href="https://www.mygeoverse.com/platform/for-creators-testers/">For Creators &amp; Testers</a></li>
+        <li><a href="https://www.mygeoverse.com/platform/testbed-program/">Testbed Program</a></li>
+        <li><a href="https://www.mygeoverse.com/platform/open-standards/">Open Standards</a></li>
+        <li><a href="#modules">Platform Modules</a></li>
+        <li><a href="packages.html">Packages</a></li>
+      </ul>
+    </div>
+
+    <!-- Company col -->
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="https://www.mygeoverse.com/company/about-us/">About Us</a></li>
+        <li><a href="https://www.mygeoverse.com/company/blog/">Blog &amp; News</a></li>
+        <li><a href="https://www.mygeoverse.com/company/contact-us/">Contact Us</a></li>
+        <li><a href="https://www.mygeoverse.com/platform/for-creators-testers/#testers">Platform Login</a></li>
+        <li><a href="https://www.mygeoverse.com/solutions/">Solutions</a></li>
+      </ul>
+    </div>
+
+    <!-- Social col -->
+    <div class="footer-social">
+      <h4>Follow Us</h4>
+      <div class="social-links">
+        <a href="https://www.facebook.com" target="_blank" rel="noopener" class="social-link" aria-label="Facebook">f</a>
+        <a href="https://www.twitter.com" target="_blank" rel="noopener" class="social-link" aria-label="Twitter">𝕏</a>
+        <a href="https://www.youtube.com" target="_blank" rel="noopener" class="social-link" aria-label="YouTube">▶</a>
+      </div>
+      <p>Join the MyGeoVerse community and start exploring, creating, and testing geospatial AR content today.</p>
+    </div>
+
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-left">
+      <img src="images/XRM_logo.png" alt="XR Masters — An XRM Brand">
+      <p>© 2026 MyGeoVerse. All Rights Reserved.</p>
+    </div>
+    <ul class="footer-legal">
+      <li><a href="https://www.mygeoverse.com/privacy-policy/">Privacy Policy</a></li>
+      <li><a href="https://www.mygeoverse.com/terms-and-conditions/">Terms &amp; Conditions</a></li>
+    </ul>
+  </div>
+
+</div><!-- /footer-wrap -->
+
+</body>
+</html>
