@@ -8,9 +8,6 @@
 <link rel="canonical" href="https://frontend.mygeoverse.com/">
 <link href="https://fonts.googleapis.com/css2?family=Sarala:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  /* ═══════════════════════════════════════
-     DESIGN TOKENS — MyGeoVerse.com system
-  ═══════════════════════════════════════ */
   :root {
     --white:        #ffffff;
     --light-bg:     #F5F7F9;
@@ -39,9 +36,7 @@
     overflow-x: hidden;
   }
 
-  /* ═══════════════════════════════════════
-     TOP BAR — "part of mygeoverse.com"
-  ═══════════════════════════════════════ */
+  /* TOP BAR */
   .top-bar {
     background: var(--secondary);
     padding: 8px 40px;
@@ -51,17 +46,14 @@
     letter-spacing: 0.02em;
   }
   .top-bar a {
-    color: var(--white);
-    font-weight: 700;
+    color: var(--white); font-weight: 700;
     text-decoration: none;
     border-bottom: 1px solid rgba(255,255,255,0.4);
     transition: border-color 0.2s;
   }
   .top-bar a:hover { border-color: var(--white); }
 
-  /* ═══════════════════════════════════════
-     NAV
-  ═══════════════════════════════════════ */
+  /* NAV */
   nav {
     background: var(--white);
     border-bottom: 1px solid var(--border);
@@ -74,15 +66,10 @@
     display: flex; align-items: center; justify-content: space-between;
     gap: 20px;
   }
-
-  /* Logo */
   .nav-logo { flex-shrink: 0; }
   .nav-logo img { height: 42px; display: block; }
 
-  /* Main links */
-  .nav-links {
-    display: flex; gap: 0; list-style: none; align-items: center;
-  }
+  .nav-links { display: flex; gap: 0; list-style: none; align-items: center; }
   .nav-links > li { position: relative; }
   .nav-links > li > a {
     display: flex; align-items: center; gap: 5px;
@@ -92,20 +79,16 @@
     transition: color 0.2s, background 0.2s;
   }
   .nav-links > li > a:hover { color: var(--primary); background: var(--light-bg); }
-  .nav-links > li > a.active { color: var(--primary); }
 
-  /* Dropdown arrow */
-  .nav-links .arrow {
+  .arrow {
     display: inline-block; width: 0; height: 0;
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
     border-top: 5px solid currentColor;
-    opacity: 0.5; transition: transform 0.2s;
-    margin-top: 1px;
+    opacity: 0.5; transition: transform 0.2s; margin-top: 1px;
   }
   .nav-links > li:hover .arrow { transform: rotate(180deg); }
 
-  /* Dropdown menus */
   .nav-dropdown {
     display: none;
     position: absolute; top: calc(100% + 8px); left: 0;
@@ -113,7 +96,7 @@
     border: 1px solid var(--border);
     border-radius: var(--radius);
     box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-    min-width: 200px; padding: 8px 0;
+    min-width: 210px; padding: 8px 0;
     list-style: none; z-index: 300;
   }
   .nav-links > li:hover .nav-dropdown { display: block; }
@@ -129,13 +112,9 @@
     color: var(--accent); background: rgba(236,102,37,0.1);
     border-radius: 4px; padding: 2px 6px; margin-left: 8px;
   }
-
-  /* Divider in dropdown */
   .nav-dropdown .sep { height: 1px; background: var(--border); margin: 6px 0; }
 
-  /* Nav right side */
   .nav-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-
   .nav-login {
     font-size: 13px; font-weight: 700; color: var(--text-dark);
     text-decoration: none; padding: 8px 16px;
@@ -143,7 +122,6 @@
     transition: border-color 0.2s, color 0.2s;
   }
   .nav-login:hover { border-color: var(--primary); color: var(--primary); }
-
   .nav-cta {
     background: var(--accent); color: var(--white) !important;
     font-weight: 700; font-size: 13px; letter-spacing: 0.03em;
@@ -153,23 +131,17 @@
   }
   .nav-cta:hover { background: #d45a20; transform: translateY(-1px); }
 
-  /* Hamburger */
   .nav-burger {
     display: none; background: none; border: none; cursor: pointer;
     padding: 6px; flex-direction: column; gap: 5px;
   }
   .nav-burger span {
     display: block; width: 24px; height: 2px;
-    background: var(--text-dark); border-radius: 2px; transition: 0.2s;
+    background: var(--text-dark); border-radius: 2px;
   }
 
-  /* ═══════════════════════════════════════
-     HERO
-  ═══════════════════════════════════════ */
-  .hero-wrap {
-    background: var(--dark-hero);
-    padding: 88px 40px 80px;
-  }
+  /* HERO */
+  .hero-wrap { background: var(--dark-hero); padding: 88px 40px 80px; }
   .hero {
     max-width: 1200px; margin: 0 auto;
     opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards;
@@ -186,10 +158,9 @@
   }
 
   h1 {
-    font-size: clamp(34px, 4.8vw, 62px);
-    font-weight: 700; line-height: 1.07;
-    color: var(--white); letter-spacing: -0.01em;
-    margin-bottom: 22px;
+    font-size: clamp(34px, 4.8vw, 62px); font-weight: 700;
+    line-height: 1.07; color: var(--white);
+    letter-spacing: -0.01em; margin-bottom: 22px;
   }
   h1 em { font-style: normal; color: var(--accent); }
 
@@ -207,7 +178,7 @@
     font-size: 14px; letter-spacing: 0.03em;
     padding: 14px 32px; border-radius: var(--pill); border: none;
     text-decoration: none; display: inline-block;
-    transition: background 0.2s, transform 0.2s; cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
   }
   .btn-primary:hover { background: #d45a20; transform: translateY(-1px); }
 
@@ -222,12 +193,10 @@
   }
   .btn-ghost:hover { border-color: rgba(255,255,255,0.72); transform: translateY(-1px); }
 
-  /* Module nav pills */
   .module-nav { display: flex; gap: 10px; flex-wrap: wrap; }
   .module-pill {
     display: inline-flex; align-items: center; gap: 7px;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.16);
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.16);
     border-radius: var(--pill); padding: 7px 16px;
     font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.8);
     text-decoration: none; transition: background 0.2s, border-color 0.2s;
@@ -235,11 +204,8 @@
   .module-pill:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.38); }
   .module-pill .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
 
-  /* ═══════════════════════════════════════
-     PAGE & SECTIONS
-  ═══════════════════════════════════════ */
+  /* PAGE */
   .page { max-width: 1200px; margin: 0 auto; padding: 0 40px 80px; }
-
   .divider { height: 1px; background: var(--border); margin: 60px 0; }
 
   .section-eyebrow {
@@ -252,9 +218,7 @@
   }
   .section-sub { font-size: 15px; color: var(--text); line-height: 1.72; max-width: 580px; }
 
-  /* ═══════════════════════════════════════
-     MODULE SECTIONS
-  ═══════════════════════════════════════ */
+  /* MODULE SECTIONS */
   .module-section {
     margin-bottom: 76px;
     opacity: 0; animation: fadeUp 0.7s ease forwards;
@@ -266,7 +230,6 @@
   .module-section:nth-child(5) { animation-delay: 0.25s; }
 
   .module-header { display: flex; align-items: flex-start; gap: 18px; margin-bottom: 32px; }
-
   .module-number {
     font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
     color: var(--white); padding: 5px 13px; border-radius: var(--pill);
@@ -282,9 +245,7 @@
   }
   .module-header-text p { font-size: 15px; color: var(--text); line-height: 1.72; max-width: 700px; }
 
-  /* ═══════════════════════════════════════
-     FEATURE CARDS
-  ═══════════════════════════════════════ */
+  /* FEATURE CARDS */
   .features-grid { display: grid; gap: 18px; }
   .features-grid.cols-2 { grid-template-columns: 1fr 1fr; }
   .features-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
@@ -317,18 +278,12 @@
     letter-spacing: 0.06em; text-transform: uppercase;
     padding: 4px 12px; border-radius: var(--pill); margin-top: 14px;
   }
-  .tag-live {
-    background: rgba(22,102,158,0.08); border: 1px solid rgba(22,102,158,0.2); color: var(--primary);
-  }
-  .tag-coming {
-    background: rgba(236,102,37,0.08); border: 1px solid rgba(236,102,37,0.25); color: var(--accent);
-  }
+  .tag-live { background: rgba(22,102,158,0.08); border: 1px solid rgba(22,102,158,0.2); color: var(--primary); }
+  .tag-coming { background: rgba(236,102,37,0.08); border: 1px solid rgba(236,102,37,0.25); color: var(--accent); }
 
-  /* ═══════════════════════════════════════
-     DEVICES
-  ═══════════════════════════════════════ */
+  /* DEVICES */
   .devices-section { margin-bottom: 76px; opacity: 0; animation: fadeUp 0.7s ease 0.1s forwards; }
-  .devices-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 38px; }
+  .devices-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 38px; }
 
   .device-card {
     background: var(--white); border: 1px solid var(--border);
@@ -344,7 +299,6 @@
   .device-icon { font-size: 32px; margin-bottom: 16px; display: block; }
   .device-card h3 { font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 9px; }
   .device-card p { font-size: 13px; color: var(--text); line-height: 1.68; margin-bottom: 18px; }
-
   .device-specs { display: flex; flex-direction: column; gap: 7px; }
   .device-spec {
     font-size: 12px; color: var(--text);
@@ -357,9 +311,7 @@
   .dc2 .device-spec::before { background: var(--accent); }
   .dc3 .device-spec::before { background: var(--secondary); }
 
-  /* ═══════════════════════════════════════
-     CTA SECTION
-  ═══════════════════════════════════════ */
+  /* CTA */
   .cta-section {
     background: var(--dark-hero); border-radius: var(--radius);
     padding: 72px 64px; text-align: center;
@@ -376,23 +328,15 @@
   }
   .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
-  /* ═══════════════════════════════════════
-     FOOTER
-  ═══════════════════════════════════════ */
-  .footer-wrap {
-    background: var(--dark-footer);
-    margin-top: 80px; padding: 64px 40px 0;
-  }
+  /* FOOTER */
+  .footer-wrap { background: var(--dark-footer); margin-top: 80px; padding: 64px 40px 0; }
   .footer-inner {
     max-width: 1200px; margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
-    gap: 48px;
-    padding-bottom: 52px;
+    display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+    gap: 48px; padding-bottom: 52px;
     border-bottom: 1px solid rgba(255,255,255,0.08);
   }
 
-  /* Col 1 — brand */
   .footer-brand img { height: 48px; margin-bottom: 20px; display: block; }
   .footer-brand p {
     font-size: 13px; color: rgba(255,255,255,0.5);
@@ -409,11 +353,9 @@
   .app-badge span { font-size: 10px; color: rgba(255,255,255,0.5); display: block; }
   .app-badge strong { font-size: 13px; color: var(--white); display: block; line-height: 1.2; }
 
-  /* Col 2 & 3 — links */
   .footer-col h4 {
     font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-    font-weight: 700; color: rgba(255,255,255,0.35);
-    margin-bottom: 20px;
+    font-weight: 700; color: rgba(255,255,255,0.35); margin-bottom: 20px;
   }
   .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
   .footer-col ul li a {
@@ -421,13 +363,7 @@
     text-decoration: none; transition: color 0.2s;
   }
   .footer-col ul li a:hover { color: var(--white); }
-  .footer-col ul li a .cs {
-    font-size: 9px; font-weight: 700; letter-spacing: 0.08em;
-    color: var(--accent); background: rgba(236,102,37,0.12);
-    border-radius: 4px; padding: 2px 6px; margin-left: 6px;
-  }
 
-  /* Col 4 — social */
   .footer-social h4 {
     font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
     font-weight: 700; color: rgba(255,255,255,0.35); margin-bottom: 20px;
@@ -437,13 +373,12 @@
     width: 38px; height: 38px; border-radius: 50%;
     background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
     display: flex; align-items: center; justify-content: center;
-    font-size: 16px; text-decoration: none;
+    font-size: 15px; text-decoration: none; color: rgba(255,255,255,0.7);
     transition: background 0.2s, border-color 0.2s;
   }
   .social-link:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); }
   .footer-social p { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.65; }
 
-  /* Footer bottom bar */
   .footer-bottom {
     max-width: 1200px; margin: 0 auto;
     display: flex; justify-content: space-between; align-items: center;
@@ -456,21 +391,16 @@
   .footer-legal a { font-size: 12px; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
   .footer-legal a:hover { color: rgba(255,255,255,0.7); }
 
-  /* ═══════════════════════════════════════
-     ANIMATIONS
-  ═══════════════════════════════════════ */
+  /* ANIMATIONS */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* ═══════════════════════════════════════
-     RESPONSIVE
-  ═══════════════════════════════════════ */
+  /* RESPONSIVE */
   @media (max-width: 1024px) {
     .footer-inner { grid-template-columns: 1fr 1fr; }
   }
-
   @media (max-width: 768px) {
     .top-bar { padding: 7px 20px; font-size: 11px; }
     .nav-inner { padding: 0 20px; height: 64px; }
@@ -479,8 +409,7 @@
     .hero-wrap { padding: 60px 24px 56px; }
     .page { padding: 0 24px 60px; }
     h1 { font-size: 30px; }
-    .features-grid.cols-2,
-    .features-grid.cols-3 { grid-template-columns: 1fr; }
+    .features-grid.cols-2, .features-grid.cols-3 { grid-template-columns: 1fr; }
     .devices-grid { grid-template-columns: 1fr; }
     .cta-section { padding: 48px 28px; }
     .footer-wrap { padding: 48px 24px 0; }
@@ -503,11 +432,10 @@
   <div class="nav-inner">
 
     <a class="nav-logo" href="https://www.mygeoverse.com">
-      <img src="images/MGV_logo.png" alt="MyGeoVerse">
+      <img src="images/MGV_logo_blue.png" alt="MyGeoVerse">
     </a>
 
     <ul class="nav-links">
-
       <li>
         <a href="#">Platform <span class="arrow"></span></a>
         <ul class="nav-dropdown">
@@ -519,7 +447,6 @@
           <li><a href="packages.html">Packages &amp; Pricing</a></li>
         </ul>
       </li>
-
       <li>
         <a href="#">Solutions <span class="arrow"></span></a>
         <ul class="nav-dropdown">
@@ -529,7 +456,6 @@
           <li><a href="https://www.mygeoverse.com/solutions/">Entertainment &amp; Events</a></li>
         </ul>
       </li>
-
       <li>
         <a href="#">Company <span class="arrow"></span></a>
         <ul class="nav-dropdown">
@@ -538,7 +464,6 @@
           <li><a href="https://www.mygeoverse.com/company/contact-us/">Contact Us</a></li>
         </ul>
       </li>
-
     </ul>
 
     <div class="nav-right">
@@ -580,7 +505,6 @@
 
   <div class="divider"></div>
 
-  <!-- MODULES -->
   <section id="modules">
 
     <!-- 01 Spatial Browser -->
@@ -812,9 +736,8 @@
 <div class="footer-wrap">
   <div class="footer-inner">
 
-    <!-- Brand col -->
     <div class="footer-brand">
-      <img src="images/MGV_logo.png" alt="MyGeoVerse">
+      <img src="images/MGV_logo_blue.png" alt="MyGeoVerse">
       <p>MyGeoVerse is the modular spatial AR platform powering location-aware experiences across mobile, AI glasses, and mixed reality devices.</p>
       <div class="footer-app-badges">
         <a href="https://apps.apple.com" target="_blank" rel="noopener" class="app-badge">
@@ -828,7 +751,6 @@
       </div>
     </div>
 
-    <!-- Platform col -->
     <div class="footer-col">
       <h4>Platform</h4>
       <ul>
@@ -841,7 +763,6 @@
       </ul>
     </div>
 
-    <!-- Company col -->
     <div class="footer-col">
       <h4>Company</h4>
       <ul>
@@ -853,7 +774,6 @@
       </ul>
     </div>
 
-    <!-- Social col -->
     <div class="footer-social">
       <h4>Follow Us</h4>
       <div class="social-links">
@@ -866,10 +786,9 @@
 
   </div>
 
-  <!-- Bottom bar -->
   <div class="footer-bottom">
     <div class="footer-bottom-left">
-      <img src="images/XRM_logo.png" alt="XR Masters — An XRM Brand">
+      <img src="images/XRM_logo.png" alt="XR Masters">
       <p>© 2026 MyGeoVerse. All Rights Reserved.</p>
     </div>
     <ul class="footer-legal">
