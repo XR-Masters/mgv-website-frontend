@@ -45,14 +45,13 @@
   }
   .nav-inner {
     max-width: 1200px; margin: 0 auto;
-    height: 80px; padding: 0 40px;
+    height: 90px; padding: 0 40px;
     display: flex; align-items: center; justify-content: space-between;
     gap: 20px;
   }
   .nav-logo { flex-shrink: 0; }
-  .nav-logo img { height: 56px; display: block; }
+  .nav-logo img { height: 72px; display: block; }
 
-  /* Nav right */
   .nav-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 
   .nav-login {
@@ -159,16 +158,43 @@
   }
   .section-sub { font-size: 15px; color: var(--text); line-height: 1.72; max-width: 580px; }
 
+  /* ── DEVICES ── */
+  .devices-section { margin-bottom: 76px; opacity: 0; animation: fadeUp 0.7s ease 0.05s forwards; }
+  .devices-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 38px; }
+
+  .device-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 34px 28px;
+    box-shadow: var(--shadow); border-bottom: 3px solid var(--border);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .device-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+  .dc1 { border-bottom-color: var(--primary); }
+  .dc2 { border-bottom-color: var(--accent); }
+  .dc3 { border-bottom-color: var(--secondary); }
+
+  .device-icon { font-size: 32px; margin-bottom: 16px; display: block; }
+  .device-card h3 { font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 9px; }
+  .device-card p { font-size: 13px; color: var(--text); line-height: 1.68; margin-bottom: 18px; }
+  .device-specs { display: flex; flex-direction: column; gap: 7px; }
+  .device-spec { font-size: 12px; color: var(--text); display: flex; align-items: center; gap: 8px; }
+  .device-spec::before {
+    content: ''; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--primary); flex-shrink: 0;
+  }
+  .dc2 .device-spec::before { background: var(--accent); }
+  .dc3 .device-spec::before { background: var(--secondary); }
+
   /* ── MODULE SECTIONS ── */
   .module-section {
     margin-bottom: 76px;
     opacity: 0; animation: fadeUp 0.7s ease forwards;
   }
-  .module-section:nth-child(1) { animation-delay: 0.05s; }
-  .module-section:nth-child(2) { animation-delay: 0.1s; }
-  .module-section:nth-child(3) { animation-delay: 0.15s; }
-  .module-section:nth-child(4) { animation-delay: 0.2s; }
-  .module-section:nth-child(5) { animation-delay: 0.25s; }
+  .module-section:nth-child(1) { animation-delay: 0.08s; }
+  .module-section:nth-child(2) { animation-delay: 0.13s; }
+  .module-section:nth-child(3) { animation-delay: 0.18s; }
+  .module-section:nth-child(4) { animation-delay: 0.23s; }
+  .module-section:nth-child(5) { animation-delay: 0.28s; }
 
   .module-header { display: flex; align-items: flex-start; gap: 18px; margin-bottom: 32px; }
   .module-number {
@@ -222,33 +248,6 @@
   .tag-live { background: rgba(22,102,158,0.08); border: 1px solid rgba(22,102,158,0.2); color: var(--primary); }
   .tag-coming { background: rgba(236,102,37,0.08); border: 1px solid rgba(236,102,37,0.25); color: var(--accent); }
 
-  /* ── DEVICES ── */
-  .devices-section { margin-bottom: 76px; opacity: 0; animation: fadeUp 0.7s ease 0.1s forwards; }
-  .devices-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 38px; }
-
-  .device-card {
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 34px 28px;
-    box-shadow: var(--shadow); border-bottom: 3px solid var(--border);
-    transition: transform 0.25s, box-shadow 0.25s;
-  }
-  .device-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
-  .dc1 { border-bottom-color: var(--primary); }
-  .dc2 { border-bottom-color: var(--accent); }
-  .dc3 { border-bottom-color: var(--secondary); }
-
-  .device-icon { font-size: 32px; margin-bottom: 16px; display: block; }
-  .device-card h3 { font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 9px; }
-  .device-card p { font-size: 13px; color: var(--text); line-height: 1.68; margin-bottom: 18px; }
-  .device-specs { display: flex; flex-direction: column; gap: 7px; }
-  .device-spec { font-size: 12px; color: var(--text); display: flex; align-items: center; gap: 8px; }
-  .device-spec::before {
-    content: ''; width: 5px; height: 5px; border-radius: 50%;
-    background: var(--primary); flex-shrink: 0;
-  }
-  .dc2 .device-spec::before { background: var(--accent); }
-  .dc3 .device-spec::before { background: var(--secondary); }
-
   /* ── CTA ── */
   .cta-section {
     background: var(--dark-hero); border-radius: var(--radius);
@@ -280,13 +279,32 @@
     font-size: 13px; color: rgba(255,255,255,0.5);
     line-height: 1.75; max-width: 280px; margin-bottom: 24px;
   }
-  .footer-app-badges { display: flex; flex-direction: column; gap: 10px; }
-  .app-badge {
-    display: inline-block; text-decoration: none;
-    transition: opacity 0.2s;
+
+  /* App download box: badges left, QR right */
+  .app-download-box {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    gap: 10px;
+    align-items: center;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius);
+    padding: 16px;
+    width: fit-content;
   }
-  .app-badge:hover { opacity: 0.82; }
-  .app-badge img { height: 38px; display: block; }
+  .app-badge-link {
+    display: block; text-decoration: none;
+    transition: opacity 0.2s; grid-column: 1;
+  }
+  .app-badge-link:hover { opacity: 0.8; }
+  .app-badge-link img { height: 36px; display: block; }
+  .app-qr {
+    grid-column: 2; grid-row: 1 / span 2;
+    display: flex; align-items: center; justify-content: center;
+    padding-left: 10px; border-left: 1px solid rgba(255,255,255,0.1);
+  }
+  .app-qr img { width: 80px; height: 80px; display: block; border-radius: 6px; }
 
   .footer-col h4 {
     font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
@@ -337,8 +355,8 @@
     .footer-inner { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 768px) {
-    .nav-inner { padding: 0 20px; height: 68px; }
-    .nav-logo img { height: 44px; }
+    .nav-inner { padding: 0 20px; height: 72px; }
+    .nav-logo img { height: 52px; }
     .nav-burger { display: flex; }
     .hero-wrap { padding: 60px 24px 56px; }
     .page { padding: 0 24px 60px; }
@@ -349,6 +367,7 @@
     .footer-wrap { padding: 48px 24px 0; }
     .footer-inner { grid-template-columns: 1fr; gap: 32px; }
     .footer-bottom { flex-direction: column; align-items: flex-start; }
+    .app-download-box { width: 100%; }
   }
 </style>
 </head>
@@ -360,12 +379,10 @@
     <a class="nav-logo" href="https://www.mygeoverse.com">
       <img src="images/MGV_logo_blue.png" alt="MyGeoVerse">
     </a>
-
     <div class="nav-right">
       <a href="https://dashboard.mygeoverse.com" class="nav-login">Login</a>
       <a href="https://www.mygeoverse.com/platform/for-creators-testers/#testers" class="nav-cta">Get Beta Access</a>
     </div>
-
     <button class="nav-burger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -385,10 +402,10 @@
       <a href="#modules" class="btn-ghost">Explore Modules</a>
     </div>
     <div class="module-nav">
-      <a href="#m1" class="module-pill"><span class="dot" style="background:#16669E;"></span>Spatial Browser</a>
+      <a href="#m1" class="module-pill"><span class="dot" style="background:#16669E;"></span>Spatial Commerce Engine</a>
       <a href="#m2" class="module-pill"><span class="dot" style="background:#EC6625;"></span>Spatial Navigation</a>
-      <a href="#m3" class="module-pill"><span class="dot" style="background:#16669E;"></span>Content Management</a>
-      <a href="#m4" class="module-pill"><span class="dot" style="background:#EC6625; opacity:0.65;"></span>Spatial Revenue</a>
+      <a href="#m3" class="module-pill"><span class="dot" style="background:#16669E;"></span>Spatial Browser</a>
+      <a href="#m4" class="module-pill"><span class="dot" style="background:#EC6625; opacity:0.8;"></span>Content Management</a>
       <a href="#m5" class="module-pill"><span class="dot" style="background:#084062;"></span>Spatial Payment</a>
     </div>
   </div>
@@ -399,38 +416,76 @@
 
   <div class="divider"></div>
 
+  <!-- DEVICES — moved to top -->
+  <section class="devices-section" id="devices">
+    <div class="section-eyebrow">Hardware Support</div>
+    <div class="section-title">Built for the devices<br>visitors already carry</div>
+    <p class="section-sub">Every MyGeoVerse module is architected to run across the current and next generation of spatial hardware — with no rebuild required as the device landscape evolves.</p>
+    <div class="devices-grid">
+      <div class="device-card dc1">
+        <span class="device-icon">📱</span>
+        <h3>Mobile AR</h3>
+        <p>Full-featured spatial experiences on the device in every visitor's pocket. Audio, visual, and interactive AR — no headset required.</p>
+        <div class="device-specs">
+          <div class="device-spec">iOS (iPhone)</div>
+          <div class="device-spec">Android</div>
+          <div class="device-spec">All modules supported</div>
+          <div class="device-spec">Available now</div>
+        </div>
+      </div>
+      <div class="device-card dc2">
+        <span class="device-icon">🕶️</span>
+        <h3>Ray-Ban Meta Smart Glasses</h3>
+        <p>Hands-free, voice-driven AI companion experiences. No screen, no friction — just conversation-led guidance layered onto the real world.</p>
+        <div class="device-specs">
+          <div class="device-spec">Ray-Ban Meta (all models)</div>
+          <div class="device-spec">Voice-first interaction</div>
+          <div class="device-spec">Spatial Browser, Navigation, Commerce, Payment</div>
+          <div class="device-spec" style="color:var(--accent); font-weight:700;">Coming Soon</div>
+        </div>
+      </div>
+      <div class="device-card dc3">
+        <span class="device-icon">🥽</span>
+        <h3>Android XR</h3>
+        <p>Full mixed reality deployment on Android's open XR platform. Immersive overlays, persistent spatial content, and AI agent interaction in true mixed reality.</p>
+        <div class="device-specs">
+          <div class="device-spec">Android XR headsets</div>
+          <div class="device-spec">Full MR spatial overlay</div>
+          <div class="device-spec">Spatial Browser, Navigation, Commerce, Payment</div>
+          <div class="device-spec" style="color:var(--accent); font-weight:700;">Coming Soon</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- MODULES -->
   <section id="modules">
 
-    <!-- 01 Spatial Browser -->
+    <!-- 01 Spatial Commerce Engine -->
     <div class="module-section m1" id="m1">
       <div class="module-header">
         <div class="module-number">01</div>
         <div class="module-header-text">
-          <h2>Spatial Browser Module</h2>
-          <p>The foundation of every MyGeoVerse deployment. Define how visitors enter your spatial world — with your brand identity, your visual language, and your story front and center from the very first interaction.</p>
+          <h2>Spatial Commerce Engine <span class="tag tag-coming" style="font-size:10px; vertical-align:middle;">Coming Soon</span></h2>
+          <p>Your venue's physical layer becomes an intelligent commerce surface. MyGeoVerse's Spatial Commerce Engine combines real-time location intelligence with AI-driven recommendations — turning every square metre into a revenue opportunity for operators and a discovery engine for visitors.</p>
         </div>
       </div>
-      <div class="features-grid cols-3">
+      <div class="features-grid cols-2">
         <div class="feature-card">
-          <div class="feat-icon">🏷️</div>
-          <div class="feat-label">White Label</div>
-          <h3>App Licensing</h3>
-          <p>Deploy MyGeoVerse under your own brand. Your name in the app stores, your icon on the home screen. Full white-label licensing across iOS and Android, with your identity owning the entire experience.</p>
-          <span class="tag tag-live">Available Now</span>
+          <div class="feat-icon">🎯</div>
+          <div class="feat-label">AI Recommendations</div>
+          <h3>Sponsored Recommendations</h3>
+          <p>The MyGeoVerse recommendation engine analyzes visitor location, movement patterns, dwell time, and contextual signals in real time — surfacing hyper-relevant sponsored content at precisely the right moment. Advertisers reach audiences who are already physically present and engaged, making every impression intentional, immersive, and measurable. The engine learns continuously, improving relevance and conversion with every visit across your entire venue.</p>
+          <span class="tag tag-coming">Coming Soon</span>
         </div>
         <div class="feature-card">
-          <div class="feat-icon">🎨</div>
-          <div class="feat-label">Location-Based Branding</div>
-          <h3>Custom Logo &amp; Opening Sliders</h3>
-          <p>Define the branded entry experience for each location. Your venue's logo and onboarding sliders are customized per site — so every deployment opens with the right identity for the right place.</p>
-          <span class="tag tag-live">Mobile Only</span>
-        </div>
-        <div class="feature-card">
-          <div class="feat-icon">📍</div>
-          <div class="feat-label">Localization Control</div>
-          <h3>Location-Based Localization Enforcement</h3>
-          <p>Enforce the precise localization method your venue requires based on where visitors are. Seamlessly switch between GPS, VPS, and Cloud Anchor depending on zone, coverage conditions, or operational need — no manual override required.</p>
-          <span class="tag tag-live">Mobile Only</span>
+          <div class="feat-icon">🛑</div>
+          <div class="feat-label">Commerce</div>
+          <h3>AR Stops</h3>
+          <p>Define interactive AR destinations throughout your venue — product showcases, sponsored moments, exclusive unlocks. Visitors discover them naturally as they move through your space. Operators monetize every stop.</p>
+          <span class="tag tag-coming">Coming Soon</span>
         </div>
       </div>
     </div>
@@ -462,10 +517,44 @@
       </div>
     </div>
 
-    <!-- 03 Spatial Content Management -->
+    <!-- 03 Spatial Browser -->
     <div class="module-section m3" id="m3">
       <div class="module-header">
         <div class="module-number">03</div>
+        <div class="module-header-text">
+          <h2>Spatial Browser Module</h2>
+          <p>The foundation of every MyGeoVerse deployment. Define how visitors enter your spatial world — with your brand identity, your visual language, and your story front and center from the very first interaction.</p>
+        </div>
+      </div>
+      <div class="features-grid cols-3">
+        <div class="feature-card">
+          <div class="feat-icon">🏷️</div>
+          <div class="feat-label">White Label</div>
+          <h3>App Licensing</h3>
+          <p>Deploy MyGeoVerse under your own brand. Your name in the app stores, your icon on the home screen. Full white-label licensing across iOS and Android, with your identity owning the entire experience.</p>
+          <span class="tag tag-live">Available Now</span>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">🎨</div>
+          <div class="feat-label">Location-Based Branding</div>
+          <h3>Custom Logo &amp; Opening Sliders</h3>
+          <p>Define the branded entry experience for each location. Your venue's logo and onboarding sliders are customized per site — so every deployment opens with the right identity for the right place.</p>
+          <span class="tag tag-live">Mobile Only</span>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">📍</div>
+          <div class="feat-label">Localization Control</div>
+          <h3>Location-Based Localization Enforcement</h3>
+          <p>Enforce the precise localization method your venue requires based on where visitors are. Seamlessly switch between GPS, VPS, and Cloud Anchor depending on zone, coverage conditions, or operational need — no manual override required.</p>
+          <span class="tag tag-live">Mobile Only</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 Spatial Content Management -->
+    <div class="module-section m4" id="m4">
+      <div class="module-header">
+        <div class="module-number">04</div>
         <div class="module-header-text">
           <h2>Spatial Content Management Module</h2>
           <p>The creative and operational core of the platform. Upload, place, and manage spatially-anchored content from anywhere in the world — with AI creation tools, cloud-precision localization, and location-aware customization built in.</p>
@@ -512,33 +601,6 @@
       </div>
     </div>
 
-    <!-- 04 Spatial Revenue -->
-    <div class="module-section m4" id="m4">
-      <div class="module-header">
-        <div class="module-number">04</div>
-        <div class="module-header-text">
-          <h2>Spatial Revenue Module <span class="tag tag-coming" style="font-size:10px; vertical-align:middle;">Coming Soon</span></h2>
-          <p>Your physical space is now an active revenue channel. MyGeoVerse turns every square metre of your venue into an addressable, monetizable spatial surface — through contextually-aware advertising and immersive commerce stops.</p>
-        </div>
-      </div>
-      <div class="features-grid cols-2">
-        <div class="feature-card">
-          <div class="feat-icon">📣</div>
-          <div class="feat-label">Advertising</div>
-          <h3>Spatial Ads</h3>
-          <p>Serve location-triggered, context-aware AR advertisements within your venue's spatial layer. Offer advertisers placements that are truly unmissable — anchored to the real world, delivered exactly where attention lives.</p>
-          <span class="tag tag-coming">Coming Soon</span>
-        </div>
-        <div class="feature-card">
-          <div class="feat-icon">🛑</div>
-          <div class="feat-label">Commerce</div>
-          <h3>AR Stops</h3>
-          <p>Define interactive AR destinations throughout your venue — product showcases, sponsored moments, exclusive unlocks. Visitors discover them naturally as they move through your space. Operators monetize every stop.</p>
-          <span class="tag tag-coming">Coming Soon</span>
-        </div>
-      </div>
-    </div>
-
     <!-- 05 Spatial Payment -->
     <div class="module-section m5" id="m5">
       <div class="module-header">
@@ -570,50 +632,6 @@
 
   <div class="divider"></div>
 
-  <!-- DEVICES -->
-  <section class="devices-section" id="devices">
-    <div class="section-eyebrow">Hardware Support</div>
-    <div class="section-title">Built for the devices<br>visitors already carry</div>
-    <p class="section-sub">Every MyGeoVerse module is architected to run across the current and next generation of spatial hardware — with no rebuild required as the device landscape evolves.</p>
-    <div class="devices-grid">
-      <div class="device-card dc1">
-        <span class="device-icon">📱</span>
-        <h3>Mobile AR</h3>
-        <p>Full-featured spatial experiences on the device in every visitor's pocket. Audio, visual, and interactive AR — no headset required.</p>
-        <div class="device-specs">
-          <div class="device-spec">iOS (iPhone)</div>
-          <div class="device-spec">Android</div>
-          <div class="device-spec">All modules supported</div>
-          <div class="device-spec">Available now</div>
-        </div>
-      </div>
-      <div class="device-card dc2">
-        <span class="device-icon">🕶️</span>
-        <h3>Ray-Ban Meta Smart Glasses</h3>
-        <p>Hands-free, voice-driven AI companion experiences. No screen, no friction — just conversation-led guidance layered onto the real world.</p>
-        <div class="device-specs">
-          <div class="device-spec">Ray-Ban Meta (all models)</div>
-          <div class="device-spec">Voice-first interaction</div>
-          <div class="device-spec">Spatial Browser, Navigation, Revenue, Payment</div>
-          <div class="device-spec" style="color:var(--accent); font-weight:700;">Coming Soon</div>
-        </div>
-      </div>
-      <div class="device-card dc3">
-        <span class="device-icon">🥽</span>
-        <h3>Android XR</h3>
-        <p>Full mixed reality deployment on Android's open XR platform. Immersive overlays, persistent spatial content, and AI agent interaction in true mixed reality.</p>
-        <div class="device-specs">
-          <div class="device-spec">Android XR headsets</div>
-          <div class="device-spec">Full MR spatial overlay</div>
-          <div class="device-spec">Spatial Browser, Navigation, Revenue, Payment</div>
-          <div class="device-spec" style="color:var(--accent); font-weight:700;">Coming Soon</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
   <!-- CTA -->
   <section class="cta-section" id="contact">
     <h2>Ready to build your <em>spatial layer?</em></h2>
@@ -634,13 +652,17 @@
     <div class="footer-brand">
       <img src="images/MGV_logo.png" alt="MyGeoVerse" class="brand-logo">
       <p>MyGeoVerse is the modular spatial AR platform powering location-aware experiences across mobile, AI glasses, and mixed reality devices.</p>
-      <div class="footer-app-badges">
-        <a href="https://apps.apple.com" target="_blank" rel="noopener" class="app-badge">
+      <!-- App download box: badges left, QR right -->
+      <div class="app-download-box">
+        <a href="https://apps.apple.com" target="_blank" rel="noopener" class="app-badge-link">
           <img src="images/appstore-mgv.webp" alt="Download on the App Store">
         </a>
-        <a href="https://play.google.com" target="_blank" rel="noopener" class="app-badge">
+        <a href="https://play.google.com" target="_blank" rel="noopener" class="app-badge-link">
           <img src="images/googleplay-mgv.webp" alt="Get it on Google Play">
         </a>
+        <div class="app-qr">
+          <img src="images/download-the-app-mygeoverse-150x150.webp" alt="Scan to download MyGeoVerse">
+        </div>
       </div>
     </div>
 
