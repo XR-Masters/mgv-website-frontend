@@ -36,24 +36,7 @@
     overflow-x: hidden;
   }
 
-  /* TOP BAR */
-  .top-bar {
-    background: var(--secondary);
-    padding: 8px 40px;
-    text-align: center;
-    font-size: 12px;
-    color: rgba(255,255,255,0.75);
-    letter-spacing: 0.02em;
-  }
-  .top-bar a {
-    color: var(--white); font-weight: 700;
-    text-decoration: none;
-    border-bottom: 1px solid rgba(255,255,255,0.4);
-    transition: border-color 0.2s;
-  }
-  .top-bar a:hover { border-color: var(--white); }
-
-  /* NAV */
+  /* ── NAV ── */
   nav {
     background: var(--white);
     border-bottom: 1px solid var(--border);
@@ -62,66 +45,24 @@
   }
   .nav-inner {
     max-width: 1200px; margin: 0 auto;
-    height: 72px; padding: 0 40px;
+    height: 80px; padding: 0 40px;
     display: flex; align-items: center; justify-content: space-between;
     gap: 20px;
   }
   .nav-logo { flex-shrink: 0; }
-  .nav-logo img { height: 42px; display: block; }
+  .nav-logo img { height: 56px; display: block; }
 
-  .nav-links { display: flex; gap: 0; list-style: none; align-items: center; }
-  .nav-links > li { position: relative; }
-  .nav-links > li > a {
-    display: flex; align-items: center; gap: 5px;
-    font-size: 14px; font-weight: 700;
-    color: var(--text-dark); text-decoration: none;
-    padding: 10px 18px; border-radius: 8px;
-    transition: color 0.2s, background 0.2s;
-  }
-  .nav-links > li > a:hover { color: var(--primary); background: var(--light-bg); }
+  /* Nav right */
+  .nav-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 
-  .arrow {
-    display: inline-block; width: 0; height: 0;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 5px solid currentColor;
-    opacity: 0.5; transition: transform 0.2s; margin-top: 1px;
-  }
-  .nav-links > li:hover .arrow { transform: rotate(180deg); }
-
-  .nav-dropdown {
-    display: none;
-    position: absolute; top: calc(100% + 8px); left: 0;
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-    min-width: 210px; padding: 8px 0;
-    list-style: none; z-index: 300;
-  }
-  .nav-links > li:hover .nav-dropdown { display: block; }
-  .nav-dropdown li a {
-    display: block; padding: 10px 20px;
-    font-size: 13px; color: var(--text-dark);
-    text-decoration: none; transition: background 0.15s, color 0.15s;
-    white-space: nowrap;
-  }
-  .nav-dropdown li a:hover { background: var(--light-bg); color: var(--primary); }
-  .nav-dropdown li a span {
-    font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
-    color: var(--accent); background: rgba(236,102,37,0.1);
-    border-radius: 4px; padding: 2px 6px; margin-left: 8px;
-  }
-  .nav-dropdown .sep { height: 1px; background: var(--border); margin: 6px 0; }
-
-  .nav-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
   .nav-login {
     font-size: 13px; font-weight: 700; color: var(--text-dark);
-    text-decoration: none; padding: 8px 16px;
+    text-decoration: none; padding: 9px 20px;
     border-radius: var(--pill); border: 1.5px solid var(--border);
     transition: border-color 0.2s, color 0.2s;
   }
   .nav-login:hover { border-color: var(--primary); color: var(--primary); }
+
   .nav-cta {
     background: var(--accent); color: var(--white) !important;
     font-weight: 700; font-size: 13px; letter-spacing: 0.03em;
@@ -140,7 +81,7 @@
     background: var(--text-dark); border-radius: 2px;
   }
 
-  /* HERO */
+  /* ── HERO ── */
   .hero-wrap { background: var(--dark-hero); padding: 88px 40px 80px; }
   .hero {
     max-width: 1200px; margin: 0 auto;
@@ -204,7 +145,7 @@
   .module-pill:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.38); }
   .module-pill .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
 
-  /* PAGE */
+  /* ── PAGE ── */
   .page { max-width: 1200px; margin: 0 auto; padding: 0 40px 80px; }
   .divider { height: 1px; background: var(--border); margin: 60px 0; }
 
@@ -218,7 +159,7 @@
   }
   .section-sub { font-size: 15px; color: var(--text); line-height: 1.72; max-width: 580px; }
 
-  /* MODULE SECTIONS */
+  /* ── MODULE SECTIONS ── */
   .module-section {
     margin-bottom: 76px;
     opacity: 0; animation: fadeUp 0.7s ease forwards;
@@ -245,7 +186,7 @@
   }
   .module-header-text p { font-size: 15px; color: var(--text); line-height: 1.72; max-width: 700px; }
 
-  /* FEATURE CARDS */
+  /* ── FEATURE CARDS ── */
   .features-grid { display: grid; gap: 18px; }
   .features-grid.cols-2 { grid-template-columns: 1fr 1fr; }
   .features-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
@@ -281,7 +222,7 @@
   .tag-live { background: rgba(22,102,158,0.08); border: 1px solid rgba(22,102,158,0.2); color: var(--primary); }
   .tag-coming { background: rgba(236,102,37,0.08); border: 1px solid rgba(236,102,37,0.25); color: var(--accent); }
 
-  /* DEVICES */
+  /* ── DEVICES ── */
   .devices-section { margin-bottom: 76px; opacity: 0; animation: fadeUp 0.7s ease 0.1s forwards; }
   .devices-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 38px; }
 
@@ -300,10 +241,7 @@
   .device-card h3 { font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 9px; }
   .device-card p { font-size: 13px; color: var(--text); line-height: 1.68; margin-bottom: 18px; }
   .device-specs { display: flex; flex-direction: column; gap: 7px; }
-  .device-spec {
-    font-size: 12px; color: var(--text);
-    display: flex; align-items: center; gap: 8px;
-  }
+  .device-spec { font-size: 12px; color: var(--text); display: flex; align-items: center; gap: 8px; }
   .device-spec::before {
     content: ''; width: 5px; height: 5px; border-radius: 50%;
     background: var(--primary); flex-shrink: 0;
@@ -311,7 +249,7 @@
   .dc2 .device-spec::before { background: var(--accent); }
   .dc3 .device-spec::before { background: var(--secondary); }
 
-  /* CTA */
+  /* ── CTA ── */
   .cta-section {
     background: var(--dark-hero); border-radius: var(--radius);
     padding: 72px 64px; text-align: center;
@@ -328,7 +266,7 @@
   }
   .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
-  /* FOOTER */
+  /* ── FOOTER ── */
   .footer-wrap { background: var(--dark-footer); margin-top: 80px; padding: 64px 40px 0; }
   .footer-inner {
     max-width: 1200px; margin: 0 auto;
@@ -337,21 +275,18 @@
     border-bottom: 1px solid rgba(255,255,255,0.08);
   }
 
-  .footer-brand img { height: 48px; margin-bottom: 20px; display: block; }
+  .footer-brand img.brand-logo { height: 48px; margin-bottom: 20px; display: block; }
   .footer-brand p {
     font-size: 13px; color: rgba(255,255,255,0.5);
     line-height: 1.75; max-width: 280px; margin-bottom: 24px;
   }
   .footer-app-badges { display: flex; flex-direction: column; gap: 10px; }
   .app-badge {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14);
-    border-radius: 10px; padding: 9px 16px; text-decoration: none;
-    transition: background 0.2s;
+    display: inline-block; text-decoration: none;
+    transition: opacity 0.2s;
   }
-  .app-badge:hover { background: rgba(255,255,255,0.12); }
-  .app-badge span { font-size: 10px; color: rgba(255,255,255,0.5); display: block; }
-  .app-badge strong { font-size: 13px; color: var(--white); display: block; line-height: 1.2; }
+  .app-badge:hover { opacity: 0.82; }
+  .app-badge img { height: 38px; display: block; }
 
   .footer-col h4 {
     font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
@@ -391,20 +326,19 @@
   .footer-legal a { font-size: 12px; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
   .footer-legal a:hover { color: rgba(255,255,255,0.7); }
 
-  /* ANIMATIONS */
+  /* ── ANIMATIONS ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* RESPONSIVE */
+  /* ── RESPONSIVE ── */
   @media (max-width: 1024px) {
     .footer-inner { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 768px) {
-    .top-bar { padding: 7px 20px; font-size: 11px; }
-    .nav-inner { padding: 0 20px; height: 64px; }
-    .nav-links, .nav-login { display: none; }
+    .nav-inner { padding: 0 20px; height: 68px; }
+    .nav-logo img { height: 44px; }
     .nav-burger { display: flex; }
     .hero-wrap { padding: 60px 24px 56px; }
     .page { padding: 0 24px 60px; }
@@ -420,61 +354,21 @@
 </head>
 <body>
 
-<!-- TOP BAR -->
-<div class="top-bar">
-  Part of the <a href="https://www.mygeoverse.com">MyGeoVerse</a> ecosystem &nbsp;·&nbsp; Download the app:
-  <a href="https://apps.apple.com" target="_blank" rel="noopener">App Store</a> &nbsp;&amp;&nbsp;
-  <a href="https://play.google.com" target="_blank" rel="noopener">Google Play</a>
-</div>
-
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-
     <a class="nav-logo" href="https://www.mygeoverse.com">
       <img src="images/MGV_logo_blue.png" alt="MyGeoVerse">
     </a>
 
-    <ul class="nav-links">
-      <li>
-        <a href="#">Platform <span class="arrow"></span></a>
-        <ul class="nav-dropdown">
-          <li><a href="https://www.mygeoverse.com/platform/">What is MyGeoVerse</a></li>
-          <li><a href="https://www.mygeoverse.com/platform/for-creators-testers/">For Creators &amp; Testers</a></li>
-          <li><a href="https://www.mygeoverse.com/platform/testbed-program/">Testbed Program</a></li>
-          <li class="sep"></li>
-          <li><a href="#modules">Platform Modules <span>↓ this page</span></a></li>
-          <li><a href="packages.html">Packages &amp; Pricing</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">Solutions <span class="arrow"></span></a>
-        <ul class="nav-dropdown">
-          <li><a href="https://www.mygeoverse.com/solutions/">All Solutions</a></li>
-          <li><a href="https://www.mygeoverse.com/solutions/">Retail &amp; Hospitality</a></li>
-          <li><a href="https://www.mygeoverse.com/solutions/">Airports &amp; Transit</a></li>
-          <li><a href="https://www.mygeoverse.com/solutions/">Entertainment &amp; Events</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">Company <span class="arrow"></span></a>
-        <ul class="nav-dropdown">
-          <li><a href="https://www.mygeoverse.com/company/about-us/">About Us</a></li>
-          <li><a href="https://www.mygeoverse.com/company/blog/">Blog &amp; News</a></li>
-          <li><a href="https://www.mygeoverse.com/company/contact-us/">Contact Us</a></li>
-        </ul>
-      </li>
-    </ul>
-
     <div class="nav-right">
-      <a href="https://www.mygeoverse.com/platform/for-creators-testers/#testers" class="nav-login">Login</a>
-      <a href="https://www.mygeoverse.com/company/contact-us/" class="nav-cta">Get Beta Access</a>
+      <a href="https://dashboard.mygeoverse.com" class="nav-login">Login</a>
+      <a href="https://www.mygeoverse.com/platform/for-creators-testers/#testers" class="nav-cta">Get Beta Access</a>
     </div>
 
     <button class="nav-burger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
-
   </div>
 </nav>
 
@@ -736,21 +630,21 @@
 <div class="footer-wrap">
   <div class="footer-inner">
 
+    <!-- Brand -->
     <div class="footer-brand">
-      <img src="images/MGV_logo_blue.png" alt="MyGeoVerse">
+      <img src="images/MGV_logo.png" alt="MyGeoVerse" class="brand-logo">
       <p>MyGeoVerse is the modular spatial AR platform powering location-aware experiences across mobile, AI glasses, and mixed reality devices.</p>
       <div class="footer-app-badges">
         <a href="https://apps.apple.com" target="_blank" rel="noopener" class="app-badge">
-          <span style="font-size:22px; line-height:1;">🍎</span>
-          <div><span>Download on the</span><strong>App Store</strong></div>
+          <img src="images/appstore-mgv.webp" alt="Download on the App Store">
         </a>
         <a href="https://play.google.com" target="_blank" rel="noopener" class="app-badge">
-          <span style="font-size:22px; line-height:1;">▶️</span>
-          <div><span>Get it on</span><strong>Google Play</strong></div>
+          <img src="images/googleplay-mgv.webp" alt="Get it on Google Play">
         </a>
       </div>
     </div>
 
+    <!-- Platform links -->
     <div class="footer-col">
       <h4>Platform</h4>
       <ul>
@@ -763,17 +657,18 @@
       </ul>
     </div>
 
+    <!-- Company links -->
     <div class="footer-col">
       <h4>Company</h4>
       <ul>
         <li><a href="https://www.mygeoverse.com/company/about-us/">About Us</a></li>
-        <li><a href="https://www.mygeoverse.com/company/blog/">Blog &amp; News</a></li>
         <li><a href="https://www.mygeoverse.com/company/contact-us/">Contact Us</a></li>
-        <li><a href="https://www.mygeoverse.com/platform/for-creators-testers/#testers">Platform Login</a></li>
+        <li><a href="https://dashboard.mygeoverse.com">Platform Login</a></li>
         <li><a href="https://www.mygeoverse.com/solutions/">Solutions</a></li>
       </ul>
     </div>
 
+    <!-- Social -->
     <div class="footer-social">
       <h4>Follow Us</h4>
       <div class="social-links">
@@ -786,6 +681,7 @@
 
   </div>
 
+  <!-- Bottom bar -->
   <div class="footer-bottom">
     <div class="footer-bottom-left">
       <img src="images/XRM_logo.png" alt="XR Masters">
