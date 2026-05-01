@@ -345,6 +345,88 @@
   .footer-legal a { font-size: 12px; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
   .footer-legal a:hover { color: rgba(255,255,255,0.7); }
 
+  /* ── LOGIN MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(3px);
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal-box {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 36px 32px 28px;
+    max-width: 520px; width: 100%;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    animation: modalIn 0.25s ease forwards;
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .modal-close {
+    position: absolute; top: 14px; right: 16px;
+    background: none; border: none; cursor: pointer;
+    font-size: 18px; color: var(--text); line-height: 1;
+    padding: 4px 8px; border-radius: 6px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .modal-close:hover { background: var(--light-bg); color: var(--text-dark); }
+
+  .modal-box h2 {
+    font-size: 22px; font-weight: 700;
+    color: var(--primary); margin-bottom: 18px; line-height: 1.25;
+    padding-right: 24px;
+  }
+
+  .modal-box p {
+    font-size: 14px; color: var(--text-dark); line-height: 1.72;
+    margin-bottom: 14px;
+  }
+  .modal-box p a {
+    color: var(--primary); text-decoration: underline;
+  }
+
+  .modal-qr-row {
+    display: flex; align-items: center; gap: 18px;
+    margin: 20px 0 22px;
+  }
+  .modal-qr-row img {
+    width: 110px; height: 110px;
+    border: 1px solid var(--border); border-radius: 8px;
+    flex-shrink: 0;
+  }
+  .modal-qr-row p {
+    font-size: 13px; color: var(--text); line-height: 1.6; margin: 0;
+  }
+
+  .modal-testbed-link {
+    display: block; font-size: 14px; font-weight: 700;
+    color: var(--accent); text-decoration: none;
+    margin-bottom: 22px;
+    transition: opacity 0.2s;
+  }
+  .modal-testbed-link:hover { opacity: 0.8; }
+
+  .modal-proceed-btn {
+    display: block; width: 100%;
+    background: var(--accent); color: var(--white);
+    font-family: 'Sarala', sans-serif; font-weight: 700;
+    font-size: 14px; letter-spacing: 0.02em;
+    padding: 14px 20px; border-radius: var(--pill);
+    border: none; text-align: center;
+    text-decoration: none; cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .modal-proceed-btn:hover { background: #d45a20; transform: translateY(-1px); }
+
   /* ── ANIMATIONS ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
@@ -381,7 +463,7 @@
       <img src="images/MGV_logo_blue.png" alt="MyGeoVerse">
     </a>
     <div class="nav-right">
-      <a href="https://dashboard.mygeoverse.com" class="nav-login">Login</a>
+      <a href="#" class="nav-login" id="loginBtn" onclick="document.getElementById('loginModal').classList.add('open'); return false;">Login</a>
       <a href="https://www.mygeoverse.com/platform/for-creators-testers/#testers" class="nav-cta">Get Beta Access</a>
     </div>
     <button class="nav-burger" aria-label="Menu">
@@ -408,6 +490,7 @@
       <a href="#m3" class="module-pill"><span class="dot" style="background:#16669E;"></span>Spatial Browser</a>
       <a href="#m4" class="module-pill"><span class="dot" style="background:#EC6625; opacity:0.8;"></span>Content Management</a>
       <a href="#m5" class="module-pill"><span class="dot" style="background:#084062;"></span>Spatial Payment</a>
+      <a href="#m6" class="module-pill"><span class="dot" style="background:#EC6625; opacity:0.6;"></span>Location-Aware AI Avatars</a>
     </div>
   </div>
 </div>
@@ -717,6 +800,45 @@
   </div>
 
 </div><!-- /footer-wrap -->
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
+    <button class="modal-close" onclick="document.getElementById('loginModal').classList.remove('open');" aria-label="Close">✕</button>
+
+    <h2 id="modalTitle">Welcome, Before You Log In</h2>
+
+    <p>The MyGeoVerse login portal is exclusively for <strong>Tester Users</strong> and <strong>Testbed Partner organizations</strong> currently enrolled in our program.</p>
+
+    <p>If you would like to use the MyGeoVerse app, please <strong>download it</strong> on your mobile device. You can register directly through the app and apply to <a href="https://www.mygeoverse.com/platform/for-creators-testers/#testers" target="_blank" rel="noopener">become a Tester User</a> if you're interested in joining our Tester Society.</p>
+
+    <div class="modal-qr-row">
+      <img src="images/download-the-app-mygeoverse-150x150.webp" alt="Scan to download MyGeoVerse">
+      <p>Scan QR Code to download<br>the MyGeoVerse mobile app</p>
+    </div>
+
+    <a href="https://www.mygeoverse.com/platform/testbed-program/" target="_blank" rel="noopener" class="modal-testbed-link">
+      Click to learn more about the MyGeoVerse Testbed Program →
+    </a>
+
+    <a href="https://dashboard.mygeoverse.com" class="modal-proceed-btn">
+      I am a Tester / Testbed Partner — Proceed to Login →
+    </a>
+
+  </div>
+</div>
+
+<script>
+  // Close modal when clicking the overlay background
+  document.getElementById('loginModal').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('open');
+  });
+  // Close modal on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') document.getElementById('loginModal').classList.remove('open');
+  });
+</script>
 
 </body>
 </html>
